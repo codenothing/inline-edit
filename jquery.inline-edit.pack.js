@@ -1,6 +1,6 @@
 /**
  * In-Line Text Editing
- * April 3, 2008
+ * April 3, 2009
  * Corey Hart @ http://www.codenothing.com
  *
  * @href: Link to script for ajax call
