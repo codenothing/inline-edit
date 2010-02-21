@@ -1,54 +1,62 @@
 /**
- * In-Line Text Editing
- * April 3, 2009
+ * Inline Text Editing 1.2
+ * August 22, 2009
  * Corey Hart @ http://www.codenothing.com
- *
- * @href: Link to script for ajax call
- * @display: Displayed text grouping
- * @form: Form grouping
- * @text: Text input element (INPUT or TEXTAREA)
- * @save: Save Button
- * @cancel: Cancel Button
- * @loadtxt: html to replace display text with while ajax call completes
- * @hover: Class for mouseover/mouseout's on the display grouping
  */ 
 ;(function($){
 	$.fn.inlineEdit = function(options){
-		var text;
-		var settings = $.extend({
-			href: 'ajax.php',
-			display: '.display',
-			form: '.form',
-			text: '.text',
-			save: '.save',
-			cancel: '.cancel',
-			loadtxt: 'Loading...',
-			hover: 'none-error-404'
-		},options||{});
+		return this.each(function(){
+			// Settings
+			var $obj = $(this), 
+				settings = $.extend({
+					href: 'ajax.php',
+					html: true,
+					load: function(){},
+					display: '.display',
+					form: '.form',
+					text: '.text',
+					save: '.save',
+					cancel: '.cancel',
+					loadtxt: 'Loading...',
+					hover: 'none-error-404',
+					postVar: 'text',
+					postData: {}
+				}, options||{}, $.metadata ? $obj.metadata() : {});
 
-		this.each(function(){
+			// Cache All Selectors
+			var $display = $(settings.display, $obj),
+				$form = $(settings.form, $obj),
+				$text = $(settings.text, $obj),
+				$save = $(settings.save, $obj),
+				$cancel = $(settings.cancel, $obj);
+	
 			// Display Actions
-			$(settings.display, this).mouseover(function(){
-				$(this).addClass(settings.hover);
-			}).mouseout(function(){
-				$(this).removeClass(settings.hover);
-			}).click(function(){
-				text = $(this).html();
-				$(this).hide().siblings(settings.form).show().find(settings.text).val(text).focus();
+			$display.click(function(){
+				$display.hide();
+				$form.show();
+				if (settings.html) 
+					$text.val( $display.html() ).focus();
 				return false;
-			});
+			}).hover(function(){ $display.addClass( settings.hover ); }, function(){ $display.removeClass( settings.hover ); });
 
 			// Cancel Actions
-			$(settings.cancel, this).click(function(){
-				$(this).parents(settings.form).hide().siblings(settings.display).show();
+			$cancel.click(function(){
+				$form.hide();
+				$display.show();
+				// Remove hover action if stalled
+				if ($display.hasClass( settings.hover ))
+					$display.removeClass( settings.hover );
 				return false;
 			});
 
 			// Save Actions
-			$(settings.save, this).click(function(){
-				text = $(this).parents(settings.form).find(settings.text).val();
-				$(this).parents(settings.form).hide().siblings(settings.display).html(settings.loadtxt)
-					.load(settings.href, {text: text}).show();
+			$save.click(function(){
+				settings.postData[settings.postVar] = $text.val();
+				$form.hide();
+				$display.html(settings.loadtxt).load(settings.href, settings.postData, settings.load).show();
+				// Remove hover action if stalled
+				if ($display.hasClass( settings.hover ))
+					$display.removeClass( settings.hover );
 				return false;
 			});
 		});

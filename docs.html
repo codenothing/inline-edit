@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Inline Text Edit 1.2</title>
+	<link rel='stylesheet' type='text/css' href='docs.css' />
+	<script type='text/javascript' src='jquery-1.3.1.min.js'></script>
+	<script type='text/javascript' src='jquery.history.js'></script>
+<script type='text/javascript'>
+$(function(){
+	$.historyInit(function(hash){
+		$('h3.focus').removeClass('focus');
+		$('a[name='+hash+']').parent().addClass('focus');
+	});
+});
+</script>
+</head>
+<body>
+
+<!--
+Inline Text Editing 1.2
+August 22, 2009
+Corey Hart @ http://www.codenothing.com
+-->
+
+
+<h1>Inline Text Edit 1.2 Options</h1>
+
+
+<ul id='menu'>
+	<li class='title'>Options</li>
+	<li><a href='#cancel'>cancel</a></li>
+	<li><a href='#display'>display</a></li>
+	<li><a href='#form'>form</a></li>
+	<li><a href='#hover'>hover</a></li>
+	<li><a href='#href'>href</a></li>
+	<li><a href='#html'>html</a></li>
+	<li><a href='#load'>load</a></li>
+	<li><a href='#loadtxt'>loadtxt</a></li>
+	<li><a href='#postData'>postData</a></li>
+	<li><a href='#postVar'>postVar</a></li>
+	<li><a href='#save'>save</a></li>
+	<li><a href='#text'>text</a></li>
+	<li class='back'><a href='index.html'>&lt;--Back to index</a></li>
+</ul>
+
+
+
+<div id='header'>
+	<div>Default</div>
+	Name - Type
+</div>
+
+
+<h3><div class='default'>'.cancel'</div> <a name='cancel'>cancel</a> - <span class='type'>String/Selector</span></h3>
+<p>Selector of the cancel block within the context of the main object.</p>
+
+
+<h3><div class='default'>'.display'</div> <a name='display'>display</a> - <span class='type'>String/Selector</span></h3>
+<p>Selector of the display block within the context of the main object.</p>
+
+
+<h3><div class='default'>'.form'</div> <a name='form'>form</a> - <span class='type'>String/Selector</span></h3>
+<p>Selector of the form block within the context of the main object.</p>
+
+
+<h3><div class='default'>'none-error-404'</div> <a name='hover'>hover</a> - <span class='type'>String/CSS Class</span></h3>
+<p>CSS Class added/removed when hovering over the display block.</p>
+
+
+<h3><div class='default'>'ajax.php'</div> <a name='href'>href</a> - <span class='type'>String/Path</span></h3>
+<p>URL of the server side script.</p>
+
+
+<h3><div class='default'>false</div> <a name='html'>html</a> - <span class='type'>Boolean</span></h3>
+<p>If true, text box will be filled with the html contained in the display block. If false, nothing will be changed to th text box</p>
+
+
+<h3><div class='default'>Empty Function</div> <a name='load'>load</a> - <span class='type'>function</span></h3>
+<p>Callback function when result set is done being pulled from the server. The function is called as the third parameter of jQuery's <a href='http://docs.jquery.com/Ajax/load'>load()</a> function</p>
+
+
+<h3><div class='default'>'Loading...'</div> <a name='loadtxt'>loadtxt</a> - <span class='type'>String/HTML</span></h3>
+<p>HTML inserted into the display block while content is being loaded from the server</p>
+
+
+<h3><div class='default'>{}</div> <a name='postData'>postData</a> - <span class='type'>Object</span></h3>
+<p>Object passed as POST parameters to the server. Sent as the second paramter of jQuery's <a href='http://docs.jquery.com/Ajax/load'>load()</a> function.<br><br>
+<b>Note*:</b> The var stored in <a href='#postVar'>postVar</a> will always overide any var with the same name stored in the postData object.</p>
+
+
+<h3><div class='default'>'text'</div> <a name='postVar'>postVar</a> - <span class='type'>String</span></h3>
+<p>Name of the variable that contains the users input when being sent to the server</p>
+
+
+<h3><div class='default'>'.save'</div> <a name='save'>save</a> - <span class='type'>String/Selector</span></h3>
+<p>Selector of the save block within the context of the main object.</p>
+
+
+<h3><div class='default'>'.text'</div> <a name='text'>text</a> - <span class='type'>String/Selector</span></h3>
+<p>Selector of the text block within the context of the main object.</p>
+
+
+</body>
+</html>
