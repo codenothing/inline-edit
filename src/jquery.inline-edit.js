@@ -1,6 +1,6 @@
-/**
- * Inline Text Editing 1.2
- * August 22, 2009
+/*!
+ * Inline Text Editing [VERSION]
+ * [DATE]
  * Corey Hart @ http://www.codenothing.com
  */ 
 ;(function($){
