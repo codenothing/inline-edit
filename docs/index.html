@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<title>Inline Text Edit [VERSION]</title>
-	<link rel='stylesheet' type='text/css' href='docs.css' />
+	<link rel='stylesheet' type='text/css' href='styles.css' />
 	<script type='text/javascript' src='../jquery/jquery-1.4.2.js'></script>
 	<script type='text/javascript' src='../jquery/jquery.history.js'></script>
 <script type='text/javascript'>
@@ -39,6 +39,7 @@ Corey Hart @ http://www.codenothing.com
 	<li><a href='#load'>load</a></li>
 	<li><a href='#loadtxt'>loadtxt</a></li>
 	<li><a href='#postData'>postData</a></li>
+	<li><a href='#postFormat'>postFormat</a></li>
 	<li><a href='#postVar'>postVar</a></li>
 	<li><a href='#save'>save</a></li>
 	<li><a href='#text'>text</a></li>
@@ -77,8 +78,12 @@ Corey Hart @ http://www.codenothing.com
 <p>If true, text box will be filled with the html contained in the display block. If false, nothing will be changed to th text box</p>
 
 
-<h3><div class='default'>Empty Function</div> <a name='load'>load</a> - <span class='type'>function</span></h3>
-<p>Callback function when result set is done being pulled from the server. The function is called as the third parameter of jQuery's <a href='http://docs.jquery.com/Ajax/load'>load()</a> function</p>
+<h3><div class='default'>undefined</div> <a name='load'>load</a> - <span class='type'>function</span></h3>
+<p>
+	Callback function when result set is done being pulled from the server.
+	<br><br><br><br>
+	<b>Note*:</b> When set, this function overrides the default functionality of filling the display block with the response text.
+</p>
 
 
 <h3><div class='default'>'Loading...'</div> <a name='loadtxt'>loadtxt</a> - <span class='type'>String/HTML</span></h3>
@@ -86,8 +91,19 @@ Corey Hart @ http://www.codenothing.com
 
 
 <h3><div class='default'>{}</div> <a name='postData'>postData</a> - <span class='type'>Object</span></h3>
-<p>Object passed as POST parameters to the server. Sent as the second paramter of jQuery's <a href='http://docs.jquery.com/Ajax/load'>load()</a> function.<br><br>
-<b>Note*:</b> The var stored in <a href='#postVar'>postVar</a> will always overide any var with the same name stored in the postData object.</p>
+<p>
+	Object passed as POST parameters to the server.
+	<br><br><br><br>
+	<b>Note*:</b> The var stored in <a href='#postVar'>postVar</a> will always overide any var with the same name stored in the postData object.
+</p>
+
+
+<h3><div class='default'>undefined</div> <a name='postFormat'>postFormat</a> - <span class='type'>Function</span></h3>
+<p>
+	Function to be triggered to send custom data on every request.
+	<br><br><br><br>
+	<b>Note*:</b> This function <i>must</i> return an object to be effective.
+</p>
 
 
 <h3><div class='default'>'text'</div> <a name='postVar'>postVar</a> - <span class='type'>String</span></h3>
