@@ -6,4 +6,6 @@ for layout considerations.
 
 Credits
 --------
-[david](david@amereservant.com) - Suggesting ajax format instead of load for more control
+[Corey Hart](http://www.codenothing.com) - Creator
+
+[david](http://amereservant.com/) - Suggesting ajax format instead of load for more control
