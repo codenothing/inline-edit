@@ -13,7 +13,7 @@ textarea {
 	height: 150px;
 }
 
-.newText, .form {
+.newText, .form, .realform {
 	display: none;
 }
 

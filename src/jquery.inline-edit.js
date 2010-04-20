@@ -1,4 +1,4 @@
-/*!
+/*
  * Inline Text Editing [VERSION]
  * [DATE]
  * Corey Hart @ http://www.codenothing.com
@@ -6,10 +6,11 @@
 (function( $, undefined ){
 	$.fn.inlineEdit = function( options ){
 		return this.each(function(){
-			// Settings
-			var $obj = $(this), original,
+			// Settings and local cache
+			var self = this, $main = $( self ), original,
 				settings = $.extend({
 					href: 'ajax.php',
+					requestType: 'POST',
 					html: true,
 					load: undefined,
 					display: '.display',
@@ -17,22 +18,36 @@
 					text: '.text',
 					save: '.save',
 					cancel: '.cancel',
+					revert: '.revert',
 					loadtxt: 'Loading...',
-					hover: 'none-error-404',
+					hover: undefined,
 					postVar: 'text',
 					postData: {},
 					postFormat: undefined
-				}, options||{}, $.metadata ? $obj.metadata() : {}),
+				}, options || {}, $.metadata ? $main.metadata() : {} ),
 
 				// Cache All Selectors
-				$display = $obj.find( settings.display ),
-				$form = $obj.find( settings.form ),
-				$text = $obj.find( settings.text ),
-				$save = $obj.find( settings.save ),
-				$cancel = $obj.find( settings.cancel );
+				$display = $main.find( settings.display ),
+				$form = $main.find( settings.form ),
+				$text = $form.find( settings.text ),
+				$save = $form.find( settings.save ),
+				$revert = $form.find( settings.revert ),
+				$cancel = $form.find( settings.cancel );
+
+			// Make sure the plugin only get initialized once
+			if ( $.data( self, 'inline-edit' ) === true ) {
+				return;
+			}
+			$.data( self, 'inline-edit', true );
+
+			// Prevent editing form submission
+			$form.bind( 'submit.inline-edit', function(){
+				$save.trigger( 'click.inline-edit' );
+				return false;
+			});
 	
 			// Display Actions
-			$display.click(function(){
+			$display.bind( 'click.inline-edit', function(){
 				$display.hide();
 				$form.show();
 
@@ -43,28 +58,40 @@
 
 					$text.val( original ).focus();
 				}
+				else if ( original === undefined ) {
+					original = $text.val();
+				}
 
 				return false;
 			})
-			.hover(function(){
+			.bind( 'mouseenter.inline-edit', function(){
 				$display.addClass( settings.hover );
-			}, function(){
+			})
+			.bind( 'mouseleave.inline-edit', function(){
 				$display.removeClass( settings.hover );
 			});
 
+			// Add revert handler
+			$revert.bind( 'click.inline-edit', function(){
+				$text.val( original || '' ).focus();
+				return false;
+			});
+
 			// Cancel Actions
-			$cancel.click(function(){
+			$cancel.bind( 'click.inline-edit', function(){
 				$form.hide();
 				$display.show();
+
 				// Remove hover action if stalled
 				if ( $display.hasClass( settings.hover ) ) {
 					$display.removeClass( settings.hover );
 				}
+
 				return false;
 			});
 
 			// Save Actions
-			$save.click(function(){
+			$save.bind( 'click.inline-edit', function( event ) {
 				settings.postData[ settings.postVar ] = $text.val();
 				$form.hide();
 				$display.html( settings.loadtxt ).show();
@@ -75,13 +102,15 @@
 
 				$.ajax({
 					url: settings.href,
-					data: settings.dataFormat ?
-						settings.dataForm.call( $obj, {settings: settings, postData: settings.postData} ) : settings.postData,
+					type: settings.requestType,
+					data: settings.postFormat ? 
+						settings.postFormat.call( $main, event, { settings: settings, postData: settings.postData } ) :
+						settings.postData,
 					success: function( response ){
 						original = undefined;
 
 						if ( settings.load ) {
-							settings.load.call( $display, response );
+							settings.load.call( $display, event, { response: response, settings: settings } );
 							return;
 						}
 
@@ -93,4 +122,4 @@
 			});
 		});
 	};
-})(jQuery);
+})( jQuery );

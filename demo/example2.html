@@ -1,7 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
 	<title>Inline Text Editing [VERSION]</title>
 	<link rel='stylesheet' type='text/css' href='styles2.css' />
@@ -55,8 +53,10 @@ jQuery(function( $ ){
 	$('.second-block').inlineEdit({
 		href: 'ajax.php',
 		display: '#old',
+		form: '.realform',
 		text: '#change',
 		save: '.send',
+		revert: '.revert',
 		cancel: '.stop',
 		hover: 'hover',
 		loadtxt: 'Lag'
@@ -76,11 +76,12 @@ jQuery(function( $ ){
 
 <span class='second-block'>
 	<span id='old'>Unkown Author</span>
-	<span class='form'>
+	<form class='realform'>
 		<input type='text' id='change' /><br>
 		<input type='submit' class='send' value=' Save ' />
+		<input type='submit' class='revert' value=' revert ' />
 		<input type='submit' class='stop' value=' Cancel ' />
-	</span>
+	</form>
 </span>
 
 

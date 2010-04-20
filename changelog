@@ -1,0 +1,16 @@
+###
+### Inline Text Editing [VERSION] Change Log
+### [DATE]
+### Corey Hart @ http://www.codenothing.com
+###
+
+# New Features
+-Added revert hook to revert the current text back to it's starting position at first view
+-Added postFormat setting to control post data sent to the server on each request
+-Enhanced load functionality, can now control the data recieved from the server and do custom insertion
+-Can now control the type of request sent to the server (GET or POST)
+-Now preventing multiple inlineEdit initiations on the same wrapper element.
+
+# Possible Breaks
+-load function has changed completely, it gets passed 2 arguments, the event object that triggered the request,
+and a ui object holding the response and settings.
