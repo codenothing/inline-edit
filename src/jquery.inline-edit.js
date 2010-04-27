@@ -4,7 +4,8 @@
  * Corey Hart @ http://www.codenothing.com
  */ 
 (function( $, undefined ){
-	$.fn.inlineEdit = function( options ){
+
+	$.fn.inlineEdit = function( options ) {
 		return this.each(function(){
 			// Settings and local cache
 			var self = this, $main = $( self ), original,
@@ -40,7 +41,7 @@
 			}
 			$.data( self, 'inline-edit', true );
 
-			// Prevent editing form submission
+			// Prevent sending form submission
 			$form.bind( 'submit.inline-edit', function(){
 				$save.trigger( 'click.inline-edit' );
 				return false;
@@ -122,4 +123,5 @@
 			});
 		});
 	};
+
 })( jQuery );
