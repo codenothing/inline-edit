@@ -1,6 +1,6 @@
 /*
- * Inline Text Editing [VERSION]
- * [DATE]
+ * Inline Text Editing 1.3
+ * April 26, 2010
  * Corey Hart @ http://www.codenothing.com
  */ 
 (function(d,f){d.fn.inlineEdit=function(m){return this.each(function(){var i=this,g=d(i),e,a=d.extend({href:"ajax.php",requestType:"POST",html:true,load:f,display:".display",form:".form",text:".text",save:".save",cancel:".cancel",revert:".revert",loadtxt:"Loading...",hover:f,postVar:"text",postData:{},postFormat:f},m||{},d.metadata?g.metadata():{}),b=g.find(a.display),c=g.find(a.form),h=c.find(a.text),j=c.find(a.save),n=c.find(a.revert),o=c.find(a.cancel);if(d.data(i,"inline-edit")!==true){d.data(i,

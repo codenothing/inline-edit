@@ -1,7 +1,7 @@
 <?php
 /**
- * Inline Text Editing [VERSION] - PHP Temp
- * [DATE]
+ * Inline Text Editing 1.3 - PHP Temp
+ * April 26, 2010
  * Corey Hart @ http://www.codenothing.com
  *
  * Returns a trimmed out version of the POST Data sent
